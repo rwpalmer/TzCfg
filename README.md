@@ -3,62 +3,34 @@
 ## Automatically maintains the device's local time settings.
 
 ### So, what does "Automatically" mean?
-The TzCfg library can configure the local device's time zone settings based on"
-* The device's IP address
-* The device's GPS coordinates
+The TzCfg library configures the device's local time settings based on one of the following three items
+* The device's IP address, which it gets from the internet
+* The device's GPS coordinates supplied by GPS hardware or software
 * A user-specified "time zone ID" (aka "Olson Name") 
 
-Time-zone changes can be made at any time, via the web, or GPS input.
+Time-zone changes can be triggered at any time, via local code, or via the web. 
 
-Time zone information is saved in EEPROM, so the device can set proper time after a reboot, even if it has no network connectivity.
+Time zone information is saved in EEPROM, so the device can set proper time after a reboot, even if it has no network connectivity at that time.
 
-Oh, and yes, tzCfg automatically performs DST transitions.  
+Oh, and yes, tzCfg automatically performs DST transitions at their scheduled time. 
 
 
 ## How the Library Works ...
 
 * IANA maintains the time zone database that communication companies and OS vendors use to manage local time world wide. 
 
-* TzCfg obtains IANA time zone information via "timezonedb.com". TzCfg users must obtain a timezonedb.com API-key to access the data. Access is free ( for up to 1 lookup per second ). They charge a fee for access above this level. 
+* TzCfg obtains IANA time zone information via [timezonedb.com](http//timezonedb.com). TzCfg users must register for a timezonedb.com API-key to access the data. The key is free ( for up to 1 lookup per second ). They charge a fee for access above this level. [Registration link](http://timezonedb.com/register)
 
-* To enable time zone configuration by IP, TzCfg needs to know the Particle device's IP address and the time zone ID associated with that address. This information is obtained from ip-api.com". It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because many/most devices are configured with non-routable addresses (like 182.168.xxx.xxx, or 10.xxx.xxx.xxx). These can not be used for time zone lookups. 
+* To enable time zone configuration by IP, TzCfg needs to know the Particle device's IP address and the time zone ID associated with that address. This information is obtained from [ip-api.com](http://ip-api.com) which does not require an API key for non-commercial access up to 150 lookups per minute. Commercial use required preapproval ... see the site for more details.  
 
-* Time zone data is stored in EEPROM to assue that the data is available whenever the system reboots, even if no network connection is available at that time. 
+*It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because many/most devices are configured with non-routable addresses (like 192.168.xxx.xxx, or 10.xxx.xxx.xxx). Non-routable addresses can not be used for time zone lookups. IP-API returns the IP address designated as the "return address" on packets sent from your device. This is most likely the IP address assigned to the internet side of the IP gateway that your device uses to reach the internet. 
 
-## Sample Usage
-#### Most implementations require the addition of four lines of code. This sample includes a fifth to make it clear when the fifth line must be included.
+* Time zone data is stored in EEPROM to assure that the data is available whenever the system reboots, even if no network connection is available at that time. 
 
-```cpp		
-	setup() {
-	    tzCfg.begin();                          		// <- 1. Prepare tzLib to run
+## TzCfg Documentation
 
-	    tzCfg.setEepromStartByte(0);            		// <- 2. Tell tzLib where to store data in EEPROM		  
-		  
-	    tzCfg.setApiKey_timezonedb((char*)"<apikey>");	// <- 3. Set the default time zone
-
-	    tzCfg.setTimezoneByIP();                        // <- 4. One of three configuration options  
-	}
-		   
-	loop() {
-	    tzLib.maintainLocaltime();       // <- 5. Performs DST transitions & keeps time zone data current.
-	}
-```
-
-*__I M P O R T A N T__*  
-* 	The command "TzCfg.setEepromStartByte(0);" reflects the TzCfg default setting, and can be omitted in most implementations.
-* 	If the default location is not available for TzCfg to use, this command must be modified and left in place. 
-*	For example, "TzCfg.setEepromStartByte(512);" would tell TzCfg to use EEPROM bytes 512-639. 
-*	Please see the tzLib-QuickStart guide (link below) for more details. 
-
-
-// TODO: complete the following information |||||||||||||||||||||||||||||||||||||||||||||||||||||||
-// TODO: upload documentation and fix the following links.
-####[TzCfg QuickStartGuide](https://docs.google.com/document/d/e/2PACX-1vQL7RNLxRsPbv9EC9xgdZFwIcbJHS-eEm-ocAxOIScUA4sIZUem_HSJZbh2hFMzVZ7V2BmjUy5fAJlr/pub)
-
-
-##	Library Documentation
-TzCfg documentation includes an Overview, a QuickStart Guide, and a Reference Guide. 
-https://github.com/rwpalmer/tzCfg/tree/master/doc
+TzCfg Documentation: 
+[TzCfg QuickStartGuide](https://docs.google.com/document/d/e/2PACX-1vQL7RNLxRsPbv9EC9xgdZFwIcbJHS-eEm-ocAxOIScUA4sIZUem_HSJZbh2hFMzVZ7V2BmjUy5fAJlr/pub)
 
 
 ##	Firmware Examples
