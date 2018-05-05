@@ -31,7 +31,7 @@ I'm not really into markup, markdown, meltdown, or whatever it is, so forgive me
 
 TzCfg Documentation: 
 * [TzCfg QuickStartGuide](https://docs.google.com/document/d/e/2PACX-1vQL7RNLxRsPbv9EC9xgdZFwIcbJHS-eEm-ocAxOIScUA4sIZUem_HSJZbh2hFMzVZ7V2BmjUy5fAJlr/pub)
-
+* [TzCfg Command Reference](https://docs.google.com/document/d/e/2PACX-1vSAg2uOsghutDC64-izE44u9ZXh8S8i--FXHapayXSZ-EPrm93bIpW2d_fWUszqxKYYxMqM0jmWe8mE/pub)
 
 ##	Firmware Examples
 TzCfg is packaged with three firmware examples. All three are designed to be run with a serial console.
