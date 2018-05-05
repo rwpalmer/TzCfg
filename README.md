@@ -29,7 +29,7 @@ I'm not really into markup, markdown, meltdown, or whatever it is, so forgive me
 
 ## TzCfg Documentation:
 
-TzCfg Documentation: 
+TzCfg Documentation:  
 * [TzCfg QuickStartGuide](https://docs.google.com/document/d/e/2PACX-1vQL7RNLxRsPbv9EC9xgdZFwIcbJHS-eEm-ocAxOIScUA4sIZUem_HSJZbh2hFMzVZ7V2BmjUy5fAJlr/pub)
 * [TzCfg Command Reference](https://docs.google.com/document/d/e/2PACX-1vSAg2uOsghutDC64-izE44u9ZXh8S8i--FXHapayXSZ-EPrm93bIpW2d_fWUszqxKYYxMqM0jmWe8mE/pub)
 
@@ -45,9 +45,13 @@ Sample "serial console output" is included in the comments at the the bottom of 
 
 * TzCfg (0.0.1) has exited Alpha testing ... Hope to start Beta testing by mid May, 2018.
 * Known defects: 0
-* Documentation is being developed. 
+* First draft of documentation is complete ... see links above.
+Code will appear on Particle for preliminary beta testing soon ...
+Code will appear on GitHub once the preliminary beta testing is complete ... 
 				
 Please report any issues, suggestions, or other comments to the author and maintainer: rwpalmeribm@gmail.com.
+
+I am ALWAYS looking for good ideas !!!
 
 	   
 
