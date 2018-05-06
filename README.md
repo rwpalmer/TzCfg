@@ -43,17 +43,14 @@ Sample "serial console output" is included in the comments at the the bottom of 
 
 ## Current State of the Project ...
 
-* TzCfg (0.0.1) has exited Alpha testing ... Hope to start Beta testing by mid May, 2018.
+* TzCfg (0.0.1) Beta 1
 * Known defects: 0
 * First draft of documentation is complete ... see links above.
-Code will appear on Particle for preliminary beta testing soon ...
 Code will appear on GitHub once the preliminary beta testing is complete ... 
 				
 Please report any issues, suggestions, or other comments to the author and maintainer: rwpalmeribm@gmail.com.
 
-I am ALWAYS looking for good ideas !!!
-
-	   
+Many thanks to Wagner Sartori (https://github.com/trunet) for his suggestion to use timezonedb.com as a source for timezone data. Without that suggestion, this library would not exist. 
 
 
 
