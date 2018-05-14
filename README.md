@@ -23,9 +23,26 @@ Oh, and yes, tzCfg automatically performs DST transitions at their scheduled tim
 
 * To enable time zone configuration by IP, TzCfg needs to know the Particle device's IP address and the time zone ID associated with that address. This information is obtained from [ip-api.com](http://ip-api.com) which does not require an API key for non-commercial access up to 150 lookups per minute. Commercial use requires preapproval ... see the site for more details.  
 
-*It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because that would not work.  Most IOT devices are configured with non-routable addresses (like 192.168.xxx.xxx, or 10.xxx.xxx.xxx). Non-routable addresses like these CAN NOT be used for time zone lookups. ipapi.com returns the IP address designated as the "return address" on packets sent from your device. This is most likely the IP address assigned to the internet side of the IP gateway that your device uses to communicate with the web. 
+*It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because that would not work.  Most IOT devices are configured with non-routable addresses (like 192.168.xxx.xxx, or 10.xxx.xxx.xxx). Non-routable addresses like these CAN NOT be used for time zone lookups. ipapi.com returns the IP address designated as the "return address" on packets sent from your device. This is most likely the IP address assigned to the Internet side of the IP gateway that your device uses to communicate with the web. 
 
-I'm not really into markup, markdown, meltdown, or whatever it is, so forgive me if I went a different way when it comes to documentation. 
+The following example configures the device's local time settings based on the device's IP address. It will also perform DST transitions at their scheduled time. 
+```cpp
+#include <TzCfg.h>
+
+TzCfg tzCfg;
+
+void Setup() {
+    tzCfg.begin();
+    tzCfg.setApiKey_timezonedb((char*)"YOUR_TIMEZONEDB_API_KEY");
+    tzCfg.setTimezoneByIP();
+}
+
+void Loop() {
+    tzCfg.maintainLocalTime();
+}
+```
+
+One additional command may be required if the device's EEPROM currently stores other data. See the QuickStart Guide for details. 
 
 ## TzCfg Documentation:
 
@@ -45,8 +62,8 @@ Sample "serial console output" is included in the comments at the the bottom of 
 
 * TzCfg (0.0.1) Beta 1
 * Known defects: 0
-* First draft of documentation is complete ... see links above.
-Code will appear on GitHub once the preliminary beta testing is complete ... 
+* Second draft of documentation is complete ... see links above.
+* Code has been posted to GitHub 
 				
 Please report any issues, suggestions, or other comments to the author and maintainer: rwpalmeribm@gmail.com.
 
