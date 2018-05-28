@@ -9,7 +9,7 @@ TzCfg methods automatically configure a device's local time settings based upon 
 * *GPS coordinates* (which can be obtained from a GPS device, a cellular API, or other source)
 * *time zone ID* (aka, Olson Name) 
 
-In normal usage, TzCfg methods configure local time settings in Particle setup(), as part of the boot process, but TzCfg methods can also be called from Particle loop() to update local time settings for mobile devices and from Particle functions to change local time settings via network commands.
+In normal usage, TzCfg methods configure local time settings in firmware setup(), but these methods can also be called from firmware loop() to update local time settings for mobile devices, and from a Particle function to change local time settings via network commands.
 
 Time zone information is saved in EEPROM, and the library will configure local time to the last known time zone settings if the device reboots when no network connectivity is available.
 
