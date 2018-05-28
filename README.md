@@ -1,18 +1,31 @@
 # TzCfg
 
-## A library to automatically maintain local time settings on Particle IOT devices
+## A library to maintain local time settings on Particle IOT devices
 
-### So, what does "Automatically" mean?
-The TzCfg library configures the device's local time settings based on one of the following three items
-* The device's *IP address*, which it gets from the Internet ... that's automatic.
-* The device's *GPS coordinates* supplied by the GPS hardware or software of your choice ... that's automatic.
-* A user-specified "time zone ID" (aka "Olson Name")... okay, not so automatic ... but two out of three's not bad.  
+### Library Functionality ...
 
-Time-zone changes can be triggered at any time, via software, or via the web. 
+The TzCfg library automatically determines the local time zone and DST offsets and configures the device's local time settings based on one of the following three items:
+* *IP address* (automatically detected)
+* *GPS coordinates* (obtained from a GPS device, a cellular API, or other source)
+* *time zone ID* (aka "Olson Name") 
 
-Time zone information is saved in EEPROM, so the device can set proper time after a reboot, even if it has no network connectivity at that time.
+In normal usage, TzCfg methods configure local time settings in Particle setup() as part of the boot process, but TzCfg methods can also be called from Particle loop() to update local time settings for mobile devices and from Particle functions to change local time settings via network commands.
 
-Oh, and yes, tzCfg automatically performs DST transitions at their scheduled time.
+Time zone information is saved in EEPROM, and the library will configure local time to the last known time zone settings if the device reboots when no network connectivity is available.
+
+Since IANA updates its time zone database on a regular basis, TzCfg performs a periodic "refresh" operation that will update EEPROM if relevant data (like the time of the next DST transition) has changed.
+
+TzCfg automatically performs DST transitions when they are scheduled. This is a local operation. 
+
+TzCfg methods expose a number of data elements for public use. These include: 
+* Time zone ID
+* Time zone abbreviation
+* Next DST transition time
+* HTTP Status message (useful for debugging when an update fails)
+
+Methods are also available to support various firmware test scenarios ... like testing to see how DST transitions impact logging or other logic. 
+
+TzCfg strives to keep resource usage to a minimum.  
 
 
 ## How the Library Works ...
@@ -23,9 +36,9 @@ Oh, and yes, tzCfg automatically performs DST transitions at their scheduled tim
 
 * To enable time zone configuration by IP, TzCfg needs to know the Particle device's IP address and the time zone ID associated with that address. This information is obtained from [ip-api.com](http://ip-api.com) which does not require an API key for non-commercial access up to 150 lookups per minute. Commercial use requires preapproval ... see the site for more details.  
 
-*It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because that would not work.  Most IOT devices are configured with non-routable addresses (like 192.168.xxx.xxx, or 10.xxx.xxx.xxx). Non-routable addresses like these CAN NOT be used for time zone lookups. ipapi.com returns the IP address designated as the "return address" on packets sent from your device. This is most likely the IP address assigned to the Internet side of the IP gateway that your device uses to communicate with the web. 
+*It should be noted that TzCfg does not use Particle's WiFi.localIP() function to obtain the device's IP address because that would not work.  Most IOT devices are configured with non-routable addresses (like 192.168.xxx.xxx, or 10.xxx.xxx.xxx). Non-routable addresses like these CAN NOT be used for time zone lookups. ipapi.com returns data based upon the IP address designated as the "return address" on packets sent from your device. In most cases, this would be the IP address assigned to the Internet side of the IP gateway that your device uses to communicate with the web. 
 
-The following example configures the device's local time settings based on the device's IP address. It will also perform DST transitions at their scheduled time. 
+The following code sample configures the device's local time settings based on the device's IP address. It will also perform DST transitions at their scheduled time. This is all that is needed for most implementations. 
 ```cpp
 #include <TzCfg.h>
 
@@ -63,7 +76,7 @@ Sample "serial console output" is included in the comments at the the bottom of 
 * TzCfg (0.0.1) Beta 1
 * Known defects: 0
 * Second draft of documentation is complete ... see links above.
-* Code has been posted to GitHub 
+* Code has been posted to GitHub
 				
 Please report any issues, suggestions, or other comments to the author and maintainer: rwpalmeribm@gmail.com.
 
