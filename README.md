@@ -4,7 +4,7 @@
 
 ### Library Functionality ...
 
-The TzCfg library automatically determines the local time zone and DST offsets and configures the device's local time settings based on one of the following three items:
+Given one of the following three items, the TzCfg library automatically determines the local time-zone and DST offset. It then configures the device's local time settings based on that information. 
 * *IP address* (automatically detected)
 * *GPS coordinates* (obtained from a GPS device, a cellular API, or other source)
 * *time zone ID* (aka "Olson Name") 
