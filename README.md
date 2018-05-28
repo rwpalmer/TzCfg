@@ -4,16 +4,16 @@
 
 ### Library Functionality ...
 
-Given one of the following three items, the TzCfg library automatically determines the local time-zone and DST offset. It then configures the device's local time settings based on that information. 
+TzCfg methods automatically configure a device's local time settings based upon one of the following data elements:
 * *IP address* (automatically detected)
-* *GPS coordinates* (obtained from a GPS device, a cellular API, or other source)
-* *time zone ID* (aka "Olson Name") 
+* *GPS coordinates* (which can be obtained from a GPS device, a cellular API, or other source)
+* *time zone ID* (aka, Olson Name) 
 
-In normal usage, TzCfg methods configure local time settings in Particle setup() as part of the boot process, but TzCfg methods can also be called from Particle loop() to update local time settings for mobile devices and from Particle functions to change local time settings via network commands.
+In normal usage, TzCfg methods configure local time settings in Particle setup(), as part of the boot process, but TzCfg methods can also be called from Particle loop() to update local time settings for mobile devices and from Particle functions to change local time settings via network commands.
 
 Time zone information is saved in EEPROM, and the library will configure local time to the last known time zone settings if the device reboots when no network connectivity is available.
 
-Since IANA updates its time zone database on a regular basis, TzCfg performs a periodic "refresh" operation that will update EEPROM if relevant data (like the time of the next DST transition) has changed.
+Since IANA updates its time zone database on a regular basis, TzCfg performs a periodic "refresh" operation that will update EEPROM if relevant data (like the time of the next DST transition) has changed. 
 
 TzCfg automatically performs DST transitions when they are scheduled. This is a local operation. 
 
@@ -23,7 +23,7 @@ TzCfg methods expose a number of data elements for public use. These include:
 * Next DST transition time
 * HTTP Status message (useful for debugging when an update fails)
 
-Methods are also available to support various firmware test scenarios ... like testing to see how DST transitions impact logging or other logic. 
+Methods are also available to support various firmware test scenarios ... like validating that logging and display logic perform properly when a DST transition takes place. 
 
 TzCfg strives to keep resource usage to a minimum.  
 
