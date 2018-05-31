@@ -23,7 +23,7 @@ TzCfg methods expose a number of data elements for public use. These include:
 * Next DST transition time
 * HTTP Status message (useful for debugging when an update fails)
 
-Methods are also available to support various firmware test scenarios ... like validating that logging and display logic perform properly when a DST transition takes place. 
+Methods are also available to support various firmware test scenarios ... like to validate that logging and display logic perform properly after a DST transition takes place. 
 
 TzCfg strives to keep resource usage to a minimum.  
 
